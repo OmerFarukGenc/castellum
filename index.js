@@ -1,14 +1,13 @@
+require('dotenv').config()
 const express = require('express');
 const app = express();
 const port = 3000;
 const mongoose = require("mongoose");
 const requestLoggerMiddleware = require("./middlewares/requestLogger");
 
-mongoose.connect("mongodb://localhost:27017/test");
-
+mongoose.connect(process.env.DATABASE_URL)
 app.use(express.json());
 app.use(requestLoggerMiddleware);
-
 
 app.get('/', (req, res) => {
   
